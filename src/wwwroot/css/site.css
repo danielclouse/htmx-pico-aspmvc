@@ -1,0 +1,12 @@
+@media (min-width: 992px) {
+  body > main:has(> aside) {
+    --block-spacing-horizontal: calc(var(--spacing) * 1.75);
+    grid-column-gap: calc(var(--block-spacing-horizontal) * 3);
+    display: grid;
+    grid-template-columns: 200px auto;
+  }
+}
+dialog:not([open]):has(> article),
+dialog[open="false"]:has(> article) {
+  display: flex;
+}

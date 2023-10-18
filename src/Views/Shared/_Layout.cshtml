@@ -1,0 +1,58 @@
+﻿@{
+    ViewContext.HttpContext.Response.Headers.Add("Vary", "HX-Boosted");
+}
+@if (ViewContext.HttpContext.Request.Headers["HX-Boosted"].Contains("true")|| ViewContext.HttpContext.Request.Headers["HX-Request"].Contains("true"))
+{
+    <text>@RenderBody()</text>
+}
+else
+{
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>HTMX and Pico Sandbox</title>
+        <meta name="description" content="A minimalist layout for Login pages. Built with Pico CSS." />
+        <link rel="shortcut icon" href="https://picocss.com/favicon.ico" />
+        <link rel="canonical" href="https://picocss.com/examples/sign-in/" />
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@picocss/pico@1/css/pico.min.css" />
+        <link rel="stylesheet" href="css/site.css" />
+    </head>
+
+    <body hx-boost="true" hx-target="main [role=document]">
+        <!-- Nav -->
+        <partial name="_TopNav"></partial>
+        <!-- ./ Nav -->
+
+        <!-- Main -->
+        <main class="container">
+            <partial name="_LeftNav"></partial>
+            <div role="document">
+                @RenderBody()
+            </div>
+        </main>
+        <!-- ./ Main -->
+
+        <!-- Footer -->
+        <footer class="container-fluid">
+            <small>Built with <a href="https://picocss.com" class="secondary">Pico</a> •
+
+        </footer>
+        <!-- ./ Footer -->
+
+        <!-- Minimal theme switcher -->
+        <script src="https://unpkg.com/htmx.org@1.9.6"
+            integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni"
+            crossorigin="anonymous"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/minimal-theme-switcher.js"></script>
+        @await RenderSectionAsync("Scripts", required: false)
+
+    </body>
+
+    </html>
+
+}
